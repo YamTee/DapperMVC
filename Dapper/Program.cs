@@ -1,6 +1,3 @@
-using DapperDataAccess.Data;
-using DapperDataAccess.DataAccess;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
