@@ -1,7 +1,13 @@
+using DapperDataAccess.Data;
+using DapperDataAccess.DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSingleton<IBaseDataAccess, BaseDataAccess>();
+builder.Services.AddSingleton<IProductData, ProductData>();
 
 var app = builder.Build();
 
