@@ -1,0 +1,66 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<table class="table table-hover" id="productTable">
+    <thead>
+        <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Number</th>
+            <th scope="col">Color</th>
+            <th scope="col">Standard Cost</th>
+            <th scope="col">List Price</th>
+            <th scope="col">Size</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Sell Start Date</th>
+            <th scope="col">Sell End Date</th>
+            <th scope="col">Product Category</th>
+            <th scope="col">Product Model</th>
+        </tr>
+    </thead>
+</table>
+
+@section Scripts
+{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#productTable').DataTable({
+                ajax: {
+                    url: "/Product/ServerSide",
+                    type: "POST"
+                },
+                columns: [
+                    { data: "productName" },
+                    { data: "productNumber" },
+                    { data: "color" },
+                    { data: "standardCost" },
+                    { data: "listPrice" },
+                    { data: "size" },
+                    { data: "weight" },
+                    { data: "sellStartDate",
+                        "render": function (data) {
+                            var date = new Date(data);
+                            var month = date.getMonth() + 1;
+                            return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    },
+                    { data: "sellEndDate",
+                        "render": function (data) {
+                            var date = new Date(data);
+                            var month = date.getMonth() + 1;
+                            return (month.toString().length > 1 ? month : "0" + month) + "/" + date.getDate() + "/" + date.getFullYear();
+                        }
+                    },
+                    { data: "productCategory.productCategoryName" },
+                    { data: "productModel.productModelName" },
+                ]
+
+            });
+
+        });
+    </script>
+}

@@ -2,6 +2,7 @@
 using System.Data;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using System.Collections.Generic;
 
 namespace DapperDataAccess.DataAccess;
 
