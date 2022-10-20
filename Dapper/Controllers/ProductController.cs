@@ -31,6 +31,26 @@ public class ProductController : Controller
     {
         var products = await _IProductData.GetProductByJoin();
 
-        return Json(new {Data = products});
+        return Json(new { Data = products });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ServerSideProduct()
+    {
+        var productCategories = await _IProductData.GetAllProductCategories();
+
+        var productCategory = productCategories.Distinct().ToList();
+
+        return Json(new { Data = productCategory });
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ServerSideProductModel()
+    {
+        var productModels = await _IProductData.GetAllProductModels();
+
+        var productModel = productModels.Distinct().ToList();
+
+        return Json(new { Data = productModel });
     }
 }
